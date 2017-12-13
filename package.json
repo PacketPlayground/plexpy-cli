@@ -6,6 +6,9 @@
   "files": [
     "lib/"
   ],
+  "bin": {
+    "plexpy": "lib/index.js"
+  },
   "scripts": {
     "build": "babel -d lib/ src/",
     "test": "echo \"Error: no test specified\" && exit 1"

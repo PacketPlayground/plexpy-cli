@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import low from "lowdb";
 import path from "path";
 import axios from "axios";
@@ -11,7 +13,7 @@ const settings = path.join(__dirname, "./settings.json");
 // new adapter (using a synchronous adapter)
 const adapter = new FileSync(settings);
 // define the database
-export const db = low(adapter);
+export const db = low(adapter); //eslint-disable-line
 
 const plexpy = cmd => {
   // get settings from db

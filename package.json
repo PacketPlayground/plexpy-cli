@@ -1,0 +1,38 @@
+{
+  "name": "plexpy-cli",
+  "version": "1.0.0",
+  "description": "A cli tool to interact with PlexPy",
+  "main": "lib/index.js",
+  "files": ["lib/"],
+  "scripts": {
+    "build": "babel -d lib/ src/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spencercharest/plexpy-cli.git"
+  },
+  "keywords": [
+    "plex",
+    "plexpy"
+  ],
+  "author": "Spencer Charest",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spencercharest/plexpy-cli/issues"
+  },
+  "homepage": "https://github.com/spencercharest/plexpy-cli#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.5.1",
+    "prettier": "^1.9.2"
+  }
+}

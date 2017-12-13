@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A cli tool to interact with PlexPy",
   "main": "lib/index.js",
-  "files": ["lib/"],
+  "files": [
+    "lib/"
+  ],
   "scripts": {
     "build": "babel -d lib/ src/",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -34,5 +36,9 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.5.1",
     "prettier": "^1.9.2"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "lowdb": "^1.0.0"
   }
 }

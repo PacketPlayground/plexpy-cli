@@ -13,15 +13,6 @@ const adapter = new FileSync(settings);
 // define the database
 export const db = low(adapter);
 
-// write some default properties to the settings object
-db
-  .defaults({
-    host: "",
-    port: "",
-    apiKey: ""
-  })
-  .write();
-
 const plexpy = cmd => {
   // get settings from db
   const { host, port, apiKey } = db.getState();
@@ -35,23 +26,74 @@ const plexpy = cmd => {
 const getActivity = () => {
   plexpy("get_activity")
     .then(res => {
-      const table = new Table({
-        head: ["username", "title"]
-      });
-
+      // the sessions returned by plexpy
       const { sessions } = res.data.response.data;
+      // ensure we have sessions to work with
+      if (sessions.length) {
+        // a new table for each media type
+        const movie = new Table({
+          head: ["Username", "Title"]
+        });
+        const episode = new Table({
+          head: ["Username", "Show", "Season", "Title"]
+        });
+        const track = new Table({
+          head: ["Username", "Artist", "Album", "Track"]
+        });
+        // sort the sessions by media type and push to tables
+        sessions.forEach(session => {
+          // get the media type
+          const type = session.media_type;
+          // sort based on media type
+          if (type === "movie") {
+            movie.push([session.friendly_name, session.title]);
+          } else if (type === "episode") {
+            episode.push([
+              session.friendly_name,
+              session.grandparent_title,
+              session.parent_title,
+              session.title
+            ]);
+          } else if (type === "track") {
+            track.push([
+              session.friendly_name,
+              session.grandparent_title,
+              session.parent_title,
+              session.title
+            ]);
+          }
+        });
 
-      sessions.forEach(session => table.push([session.user, session.title]));
+        // only console the table if there are current sessions for that media type
+        if (movie.length) {
+          console.log("\n", "Movies");
+          console.log(movie.toString());
+        }
 
-      console.log(table.toString());
+        if (episode.length) {
+          console.log("\n", "TV");
+          console.log(episode.toString());
+        }
+
+        if (track.length) {
+          console.log("\n", "Music");
+          console.log(track.toString());
+        }
+      } else {
+        console.log("Nothing is currently being played.");
+      }
     })
     .catch(err => logger.error(err));
 };
 
+// check if settings are needed
 if (needSettings()) {
+  // get settings if neccessary
   getSettings()
     .then(() => {
-      getActivity();
+      console.log(
+        'Settings saved! You can now connect to PlexPy. Run "plexpy" to get current activity.'
+      );
     })
     .catch(err => logger.error(err));
 } else {

@@ -4,6 +4,7 @@ import axios from "axios";
 import FileSync from "lowdb/adapters/FileSync";
 import Table from "cli-table2";
 import { needSettings, getSettings } from "./settings";
+import logger from "./logger";
 
 // json file to store settings
 const settings = path.join(__dirname, "./settings.json");
@@ -44,7 +45,7 @@ const getActivity = () => {
 
       console.log(table.toString());
     })
-    .catch(err => console.log(err));
+    .catch(err => logger.error(err));
 };
 
 if (needSettings()) {
@@ -52,7 +53,7 @@ if (needSettings()) {
     .then(() => {
       getActivity();
     })
-    .catch(err => console.log(err));
+    .catch(err => logger.error(err));
 } else {
   getActivity();
 }

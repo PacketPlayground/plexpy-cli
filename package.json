@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "cli-table2": "^0.2.0",
     "lowdb": "^1.0.0",
     "prompt": "^1.0.0"
   }

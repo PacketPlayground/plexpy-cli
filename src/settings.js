@@ -1,6 +1,15 @@
+import low from "lowdb";
+import FileSync from "lowdb/adapters/FileSync";
+import path from "path";
 import prompt from "prompt";
 import axios from "axios";
-import { db } from "./index";
+
+// json file to store settings
+const settingsFile = path.join(__dirname, "./settings.json");
+// new adapter (using a synchronous adapter)
+const adapter = new FileSync(settingsFile);
+// define the database
+export const db = low(adapter); //eslint-disable-line
 
 // function to test the plexpy api and ensure our settings are valid
 const testSettings = settings => {
@@ -66,14 +75,16 @@ export const getSettings = () =>
     // get rid of the stupid prompt message
     prompt.message = "";
 
-    prompt.get(schema, (err, results) => {
-      if (err) throw err;
+    prompt.get(schema, (err, settings) => {
+      if (err) {
+        reject(err);
+      }
       // test the user entered settings
-      testSettings(results)
+      testSettings(settings)
         .then(settingsWork => {
           if (settingsWork) {
-            db.setState(results).write();
-            resolve();
+            db.setState(settings).write();
+            resolve(settings);
           } else {
             reject(
               new Error(

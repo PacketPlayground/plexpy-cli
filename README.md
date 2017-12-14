@@ -2,13 +2,14 @@
 
 A simple cli tool for monitoring Plex usage through PlexPy
 
+
 ## Installation
 
 This guide assumes that you already have Plex and PlexPy installed on your machine.
 
 1. Download and install node.js
   
-    node.js can be downloaded from [here](https://nodejs.org/en/) or if you want to install node from a package manager you find instructions [here](https://nodejs.org/en/download/package-manager/)
+    node.js can be downloaded from [here](https://nodejs.org/en/) or if you want to install node from a package manager you find instructions [here](https://nodejs.org/en/download/package-manager/).
 2. Install plexpy-cli globally
 
     `npm install -g plexpy-cli`

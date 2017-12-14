@@ -2,7 +2,7 @@
 
 import commander from "commander";
 import getActivity from "./plexpy";
-import { needSettings, getSettings } from "./settings";
+import { needSettings, getSettings, resetSettings } from "./settings";
 import logger from "./logger";
 
 commander.version("1.0.0");
@@ -12,6 +12,13 @@ commander
   .description("get current plex activity")
   .action(() => {
     getActivity();
+  });
+
+commander
+  .command("reset")
+  .description("reset your plexpy settings")
+  .action(() => {
+    resetSettings();
   });
 
 // check if settings are needed

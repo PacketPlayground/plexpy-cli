@@ -44,8 +44,8 @@
     "axios": "^0.17.1",
     "cli-table2": "^0.2.0",
     "commander": "^2.12.2",
+    "inquirer": "^4.0.1",
     "lowdb": "^1.0.0",
-    "prompt": "^1.0.0",
     "winston": "^2.4.0"
   }
 }

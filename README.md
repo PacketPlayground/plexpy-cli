@@ -9,17 +9,17 @@ For v1.0.0 the only thing plexpy-cli does is report Plex activity. Why? Well, be
 ## Usage
 
 Available Commands
-| Command      | Function |
-| ------------- |:-------------:|
-| plexpy      | get current plex activity |
-| plexpy activity      | get current plex activity |
-| plexpy reset | reset plexpy credentials |
+| Command         | Function                  |
+| --------------- | ------------------------- |
+| plexpy          | get current plex activity |
+| plexpy activity | get current plex activity |
+| plexpy reset    | reset plexpy credentials  |
 
 Options
-| Option      | Function           |
-| ------------- |:-------------:|
-| -V, --version | get plexpy-cli version |
-| -h, --help | list plexpy-cli options and command |
+| Option        | Function                             |
+| ------------- | ------------------------------------ |
+| -V, --version | get plexpy-cli version               | 
+| -h, --help    | list plexpy-cli options and commands |
 
 ## Installation
 

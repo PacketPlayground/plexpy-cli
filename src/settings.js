@@ -3,6 +3,7 @@ import FileSync from "lowdb/adapters/FileSync";
 import path from "path";
 import axios from "axios";
 import inquirer from "inquirer";
+import logger from "./logger";
 
 const prompt = inquirer.createPromptModule();
 
@@ -44,6 +45,7 @@ export const needSettings = () => {
 };
 
 export const getSettings = () => {
+  // prompt questions
   const questions = [
     {
       type: "string",
@@ -79,4 +81,41 @@ export const getSettings = () => {
     .catch(err => {
       throw err;
     });
+};
+
+export const resetSettings = () => {
+  prompt([
+    {
+      type: "confirm",
+      name: "reset",
+      message: "Are you sure you want to reset your settings?"
+    }
+  ])
+    .then(({ reset }) => {
+      if (reset) {
+        // reset the settings
+        db.setState({}).write();
+        // ask if the user would like to enter new settings now
+        return prompt([
+          {
+            type: "confirm",
+            name: "newSettings",
+            message: "Would you like to enter your new settings now?"
+          }
+        ]).then(({ newSettings }) => {
+          if (newSettings) {
+            return getSettings().then(() => {
+              console.log(
+                'Settings saved! You can now connect to PlexPy. Run "plexpy --help" to see what you can do.'
+              );
+            });
+          }
+          return console.log(
+            "Ok, you will be asked for input settings next time plexpy-cli runs."
+          );
+        });
+      }
+      return console.log("Ok, your settings will NOT be reset");
+    })
+    .catch(err => logger.error(err));
 };

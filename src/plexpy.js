@@ -10,6 +10,8 @@ const plexpy = cmd => {
   return axios({
     method: "GET",
     url: `${host}:${port}/api/v2?apikey=${apiKey}&cmd=${cmd}`
+  }).catch(() => {
+    throw new Error("Could not reach PlexPy.");
   });
 };
 
@@ -73,7 +75,7 @@ const getActivity = () => {
         console.log("Nothing is currently being played.");
       }
     })
-    .catch(err => logger.error(err));
+    .catch(err => logger.error(err.message));
 };
 
 export default getActivity;

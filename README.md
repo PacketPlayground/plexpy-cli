@@ -14,7 +14,7 @@ This guide assumes that you already have Plex and PlexPy installed on your machi
     `npm install -g plexpy-cli`
 3. Input your PlexPy credentials
 
-    On first run plexpy-cli will prompt you for hostname, port, and api key. Your credentials will be stored for future use. For more information about these credentials view the [credentials](#Credentials) section.
+    On first run plexpy-cli will prompt you for hostname, port, and api key. Your credentials will be stored for future use. For more information about these credentials view the [credentials](#credentials) section.
 
 ## Credentials
 

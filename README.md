@@ -8,7 +8,8 @@ For v1.0.0 the only thing plexpy-cli does is report Plex activity. Why? Well, be
 
 ## Usage
 
-Available Commands
+Commands
+
 | Command         | Function                  |
 | --------------- | ------------------------- |
 | plexpy          | get current plex activity |
@@ -16,6 +17,7 @@ Available Commands
 | plexpy reset    | reset plexpy credentials  |
 
 Options
+
 | Option        | Function                             |
 | ------------- | ------------------------------------ |
 | -V, --version | get plexpy-cli version               | 

@@ -4,7 +4,7 @@
   "description": "A cli tool to interact with PlexPy",
   "main": "lib/index.js",
   "files": [
-    "lib/"
+    "lib/*.js"
   ],
   "bin": {
     "plexpy": "lib/index.js"

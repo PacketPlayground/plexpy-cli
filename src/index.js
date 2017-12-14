@@ -3,10 +3,11 @@
 import commander from "commander";
 import getActivity from "./plexpy";
 import { needSettings, getSettings, resetSettings } from "./settings";
-import logger from "./logger";
 
+// commander setup
 commander.version("1.0.0");
 
+// activity command
 commander
   .command("activity")
   .description("get current plex activity")
@@ -14,6 +15,7 @@ commander
     getActivity();
   });
 
+// reset command
 commander
   .command("reset")
   .description("reset your plexpy settings")
@@ -24,14 +26,12 @@ commander
 // check if settings are needed
 if (needSettings()) {
   // get settings if neccessary
-  getSettings()
-    .then(() => {
-      console.log(
-        'Settings saved! You can now connect to PlexPy. Run "plexpy --help" to see what you can do.'
-      );
-    })
-    .catch(err => logger.error(err));
+  getSettings();
 } else {
   // if credentials look good let's parse the user command
   commander.parse(process.argv);
+  // if no arguments were provided run getActivity as the default function
+  if (commander.args.length < 1) {
+    getActivity();
+  }
 }

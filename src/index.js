@@ -5,7 +5,7 @@ import getActivity from "./plexpy";
 import { needSettings, getSettings, resetSettings } from "./settings";
 
 // commander setup
-commander.version("1.0.1");
+commander.version("1.0.2");
 
 // activity command
 commander

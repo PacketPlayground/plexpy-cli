@@ -6,7 +6,7 @@ If you host Plex on a remote server you probably spend a fair amount of time int
 
 For v1 the only thing plexpy-cli does is report Plex activity. Why? Well, because that's all I need it to do. I am happy to consider feature requests and implement reasonable features or take PRs. Keep in mind that this is built to interact with the PlexPy API and not Plex directly so it is limited by the PlexPy API. Interacting directly with Plex is outside the scope of this project.
 
-(senitive info redacted)
+(sensitive info redacted)
 ![plexpy-cli](assets/images/plexpy-cli.png)
 
 ## Usage

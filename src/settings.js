@@ -7,8 +7,10 @@ import logger from "./logger";
 
 const prompt = inquirer.createPromptModule();
 
+const home = process.env.HOME || process.env.USERPROFILE;
+
 // json file to store settings
-const settingsFile = path.join(__dirname, "./settings.json");
+const settingsFile = path.join(home, ".plexpy-cli.json");
 // new adapter (using a synchronous adapter)
 const adapter = new FileSync(settingsFile);
 // define the database

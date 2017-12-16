@@ -15,6 +15,27 @@ const plexpy = cmd => {
   });
 };
 
+const printTable = (data, title) => {
+  // define table headers
+  const head = data[0];
+  // remove the header from the data
+  data.splice(0, 1);
+
+  const table = new Table({
+    head
+  });
+
+  if (data.length) {
+    data.forEach(row => table.push(row));
+
+    if (title) {
+      console.log("\n", title);
+    }
+
+    console.log(table.toString());
+  }
+};
+
 const getActivity = () => {
   plexpy("get_activity")
     .then(res => {
@@ -23,54 +44,42 @@ const getActivity = () => {
       // ensure we have sessions to work with
       if (sessions.length) {
         // a new table for each media type
-        const movie = new Table({
-          head: ["Username", "Title"]
-        });
-        const episode = new Table({
-          head: ["Username", "Show", "Season", "Title"]
-        });
-        const track = new Table({
-          head: ["Username", "Artist", "Album", "Track"]
-        });
-        // sort the sessions by media type and push to tables
+        const movie = [["Username", "Title", "State"]];
+        const episode = [["Username", "Show", "Season", "Title", "State"]];
+        const track = [["Username", "Artist", "Album", "Track", "State"]];
+
+        // sort the sessions by media type and push to table
         sessions.forEach(session => {
-          // get the media type
+          // define some variables
           const type = session.media_type;
+          const username = session.friendly_name;
+          const { title } = session;
+          const parentTitle = session.parent_title;
+          const grandparentTitle = session.grandparent_title;
+          // capitalize the first letter (don't know why this bothers me so much!)
+          const state =
+            session.state.charAt(0).toUpperCase() +
+            session.state.substring(1, session.state.length + 1);
+
           // sort based on media type
           if (type === "movie") {
-            movie.push([session.friendly_name, session.title]);
+            movie.push([username, title, state]);
           } else if (type === "episode") {
             episode.push([
-              session.friendly_name,
-              session.grandparent_title,
-              session.parent_title,
-              session.title
+              username,
+              grandparentTitle,
+              parentTitle,
+              title,
+              state
             ]);
           } else if (type === "track") {
-            track.push([
-              session.friendly_name,
-              session.grandparent_title,
-              session.parent_title,
-              session.title
-            ]);
+            track.push([username, grandparentTitle, parentTitle, title, state]);
           }
         });
 
-        // only console the table if there are current sessions for that media type
-        if (movie.length) {
-          console.log("\n", "Movies");
-          console.log(movie.toString());
-        }
-
-        if (episode.length) {
-          console.log("\n", "TV");
-          console.log(episode.toString());
-        }
-
-        if (track.length) {
-          console.log("\n", "Music");
-          console.log(track.toString());
-        }
+        printTable(movie, "Movies");
+        printTable(episode, "TV");
+        printTable(track, "Music");
       } else {
         console.log("Nothing is currently being played.");
       }

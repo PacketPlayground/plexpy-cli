@@ -20,9 +20,13 @@ const printTable = (data, title) => {
   const head = data[0];
   // remove the header from the data
   data.splice(0, 1);
+  // set the column width
+  // settings this as a standard with for now but may set it dynamically based on number of columns in the future
+  const colWidths = head.map(() => 12);
 
   const table = new Table({
-    head
+    head,
+    colWidths
   });
 
   if (data.length) {
@@ -77,6 +81,7 @@ const getActivity = () => {
           }
         });
 
+        // print all of the tables with titles
         printTable(movie, "Movies");
         printTable(episode, "TV");
         printTable(track, "Music");

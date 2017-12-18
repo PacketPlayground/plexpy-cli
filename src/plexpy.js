@@ -15,32 +15,41 @@ const plexpy = cmd => {
   });
 };
 
-const printTable = (data, title) => {
+const print = (data, type = "pretty", title) => {
   // define table headers
   const head = data[0];
   // remove the header from the data
   data.splice(0, 1);
-  // set the column width
-  // settings this as a standard with for now but may set it dynamically based on number of columns in the future
-  const colWidths = head.map(() => 12);
-
-  const table = new Table({
-    head,
-    colWidths
-  });
 
   if (data.length) {
-    data.forEach(row => table.push(row));
-
     if (title) {
       console.log("\n", title);
     }
 
-    console.log(table.toString());
+    if (type === "pretty") {
+      // set column width
+      const colWidths = head.map(() => 12);
+      // create the new table
+      const table = new Table({
+        head,
+        colWidths
+      });
+      // push data to the table
+      data.forEach(row => table.push(row));
+      // log the table
+      console.log(table.toString());
+    } else if (type === "plain") {
+      // log each row as plain text
+      data.forEach(row => console.log(`\n${row.join(" - ")}`));
+      // add some padding with a new line
+      // console.log("\n");
+    } else {
+      throw new Error(`${type} is not a valid print type.`);
+    }
   }
 };
 
-const getActivity = () => {
+const getActivity = printType => {
   plexpy("get_activity")
     .then(res => {
       // the sessions returned by plexpy
@@ -81,10 +90,11 @@ const getActivity = () => {
           }
         });
 
-        // print all of the tables with titles
-        printTable(movie, "Movies");
-        printTable(episode, "TV");
-        printTable(track, "Music");
+        print(movie, printType, "Movies");
+        print(episode, printType, "TV");
+        print(track, printType, "Music");
+        // add some padding
+        console.log("\n");
       } else {
         console.log("Nothing is currently being played.");
       }

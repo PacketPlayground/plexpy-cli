@@ -5,7 +5,7 @@ import getActivity from "./plexpy";
 import { needSettings, getSettings, resetSettings } from "./settings";
 
 // commander setup
-commander.version("1.0.3").option("-p, --plain", "print results in plain text");
+commander.version("1.0.4").option("-p, --plain", "print results in plain text");
 
 // activity command
 commander

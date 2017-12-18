@@ -21,10 +21,11 @@ Commands
 
 Options
 
-| Option        | Function                             |
-| ------------- | ------------------------------------ |
-| -V, --version | get plexpy-cli version               | 
-| -h, --help    | list plexpy-cli options and commands |
+| Option        | Function                               |
+| ------------- | -------------------------------------- |
+| -V, --version | get plexpy-cli version                 | 
+| -h, --help    | list plexpy-cli options and commands   |
+| -p, --plain   | print results in plain text (no table) |
 
 ## Installation
 
@@ -39,6 +40,8 @@ This guide assumes that you already have Plex and PlexPy installed on your machi
 3. Input your PlexPy credentials
 
     On first run plexpy-cli will prompt you for hostname, port, and api key. Your credentials will be stored for future use. For more information about these credentials view the [credentials](#credentials) section.
+
+    ![plexpy-cli](assets/images/setup.png)
 
 ## Credentials
 

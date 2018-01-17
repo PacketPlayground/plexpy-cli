@@ -6,7 +6,7 @@ import { needSettings, getSettings, resetSettings } from "./settings";
 
 // commander setup
 commander
-  .version("1.0.4")
+  .version("1.1.1")
   .option("-p, --plain", "print results in plain text")
   .option("-f, --full", "print tables without truncating text");
 

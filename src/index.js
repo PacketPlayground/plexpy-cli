@@ -8,7 +8,7 @@ import { needSettings, getSettings, resetSettings } from "./settings";
 commander
   .version("1.0.4")
   .option("-p, --plain", "print results in plain text")
-  .option("-f, --full", "don't truncate table text");
+  .option("-f, --full", "print tables without truncating text");
 
 // activity command
 commander

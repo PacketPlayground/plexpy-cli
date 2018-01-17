@@ -1,11 +1,9 @@
 {
   "name": "plexpy-cli",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A cli tool to interact with PlexPy",
   "main": "lib/index.js",
-  "files": [
-    "lib/*.js"
-  ],
+  "files": ["lib/*.js"],
   "bin": {
     "plexpy": "lib/index.js"
   },
@@ -17,10 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/spencercharest/plexpy-cli.git"
   },
-  "keywords": [
-    "plex",
-    "plexpy"
-  ],
+  "keywords": ["plex", "plexpy"],
   "author": "Spencer Charest",
   "license": "ISC",
   "bugs": {

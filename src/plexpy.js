@@ -15,41 +15,40 @@ const plexpy = cmd => {
   });
 };
 
-const print = (data, type = "pretty", title) => {
+const print = (data, title, options) => {
   // define table headers
-  const head = data[0];
-  // remove the header from the data
-  data.splice(0, 1);
+  const [head] = data.splice(0, 1);
 
   if (data.length) {
-    if (title) {
-      console.log("\n", title);
-    }
+    if (options.plain) {
+      // log each row as plain text
+      data.forEach(row => console.log(`\n${row.join(" - ")}`));
+    } else {
+      let table;
 
-    if (type === "pretty") {
-      // set column width
-      const colWidths = head.map(() => 12);
-      // create the new table
-      const table = new Table({
-        head,
-        colWidths
-      });
+      if (options.full) {
+        table = new Table({
+          head
+        });
+      } else {
+        // set column width
+        const colWidths = head.map(() => 12);
+        // create the new table
+        table = new Table({
+          head,
+          colWidths
+        });
+      }
+
       // push data to the table
       data.forEach(row => table.push(row));
       // log the table
       console.log(table.toString());
-    } else if (type === "plain") {
-      // log each row as plain text
-      data.forEach(row => console.log(`\n${row.join(" - ")}`));
-      // add some padding with a new line
-      // console.log("\n");
-    } else {
-      throw new Error(`${type} is not a valid print type.`);
     }
   }
 };
 
-const getActivity = printType => {
+const getActivity = options => {
   plexpy("get_activity")
     .then(res => {
       // the sessions returned by plexpy
@@ -90,9 +89,9 @@ const getActivity = printType => {
           }
         });
 
-        print(movie, printType, "Movies");
-        print(episode, printType, "TV");
-        print(track, printType, "Music");
+        print(movie, "Movies", options);
+        print(episode, "TV", options);
+        print(track, "Music", options);
         // add some padding
         console.log("\n");
       } else {

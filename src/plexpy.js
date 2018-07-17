@@ -1,5 +1,5 @@
 import axios from "axios";
-import Table from "cli-table2";
+import Table from "cli-table3";
 import logger from "./logger";
 import { db } from "./settings";
 
